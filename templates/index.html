@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-badge">Machine Learning Decision Support</div>
+            <h1 class="header-title">Loan Approval Predictor</h1>
+            <p class="header-subtitle">
+                Enter applicant and loan parameters to assess lending approval likelihood using our validated ML model.
+            </p>
+        </header>
+
+        <!-- Quick Sample Buttons for Instant Testing -->
+        <div class="sample-bar">
+            <span class="sample-label">Quick Test Profiles:</span>
+            <button type="button" class="sample-btn approved" id="loadApprovedBtn">
+                ✓ Load Approved Sample
+            </button>
+            <button type="button" class="sample-btn rejected" id="loadRejectedBtn">
+                ✕ Load Rejected Sample
+            </button>
+        </div>
+
+        <!-- Main Card: Form and Results -->
+        <main class="main-card">
+
+            <!-- Prediction Form -->
+            <form id="loanForm" class="loan-form" novalidate>
+
+                <!-- SECTION 1: Personal & Demographic -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">👤</span> 1. Personal & Demographic Details
+                    </h2>
+                    <div class="form-grid">
+                        
+                        <!-- Age -->
+                        <div class="form-group">
+                            <label for="Age">Age (Years) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Age" 
+                                name="Age" 
+                                min="18" 
+                                max="100" 
+                                placeholder="e.g. 38" 
+                                required
+                            >
+                            <span class="field-hint">Range: 18 - 100</span>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="form-group">
+                            <label for="Gender">Gender <span class="required">*</span></label>
+                            <select id="Gender" name="Gender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <!-- Marital Status -->
+                        <div class="form-group">
+                            <label for="Married">Marital Status <span class="required">*</span></label>
+                            <select id="Married" name="Married" required>
+                                <option value="" disabled selected>Select Marital Status</option>
+                                <option value="No">Single / Unmarried (No)</option>
+                                <option value="Yes">Married (Yes)</option>
+                            </select>
+                        </div>
+
+                        <!-- Dependents -->
+                        <div class="form-group">
+                            <label for="Dependents">Dependents <span class="required">*</span></label>
+                            <select id="Dependents" name="Dependents" required>
+                                <option value="" disabled selected>Select Dependents</option>
+                                <option value="0">0 Dependents</option>
+                                <option value="1">1 Dependent</option>
+                                <option value="2">2 Dependents</option>
+                                <option value="3+">3 or more (3+)</option>
+                            </select>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="form-group">
+                            <label for="Education">Education <span class="required">*</span></label>
+                            <select id="Education" name="Education" required>
+                                <option value="" disabled selected>Select Qualification</option>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Not Graduate">Not Graduate</option>
+                            </select>
+                        </div>
+
+                        <!-- Self Employed -->
+                        <div class="form-group">
+                            <label for="Self_Employed">Self Employed <span class="required">*</span></label>
+                            <select id="Self_Employed" name="Self_Employed" required>
+                                <option value="" disabled selected>Select Employment</option>
+                                <option value="No">No (Salaried / Employed)</option>
+                                <option value="Yes">Yes (Self-Employed)</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECTION 2: Financial Details -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">💳</span> 2. Financial Profile
+                    </h2>
+                    <div class="form-grid">
+                        
+                        <!-- Applicant Income -->
+                        <div class="form-group">
+                            <label for="Applicant_Income">Applicant Income (₹/$) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Applicant_Income" 
+                                name="Applicant_Income" 
+                                min="0" 
+                                step="1000" 
+                                placeholder="e.g. 465000" 
+                                required
+                            >
+                            <span class="field-hint">Primary applicant monthly/annual income</span>
+                        </div>
+
+                        <!-- Coapplicant Income -->
+                        <div class="form-group">
+                            <label for="Coapplicant_Income">Co-applicant Income (₹/$) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Coapplicant_Income" 
+                                name="Coapplicant_Income" 
+                                min="0" 
+                                step="1000" 
+                                placeholder="e.g. 65000 (0 if none)" 
+                                required
+                            >
+                            <span class="field-hint">Enter 0 if no co-applicant</span>
+                        </div>
+
+                        <!-- Existing Debt -->
+                        <div class="form-group">
+                            <label for="Existing_Debt">Existing Debt (₹/$) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Existing_Debt" 
+                                name="Existing_Debt" 
+                                min="0" 
+                                step="1000" 
+                                placeholder="e.g. 77000" 
+                                required
+                            >
+                            <span class="field-hint">Current outstanding liabilities</span>
+                        </div>
+
+                        <!-- Credit Score -->
+                        <div class="form-group">
+                            <label for="Credit_Score">Credit Score (300 - 850) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Credit_Score" 
+                                name="Credit_Score" 
+                                min="300" 
+                                max="850" 
+                                step="1" 
+                                placeholder="e.g. 720" 
+                                required
+                            >
+                            <span class="field-hint">Standard credit rating score</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- SECTION 3: Loan Details -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🏠</span> 3. Loan Requirements
+                    </h2>
+                    <div class="form-grid">
+                        
+                        <!-- Loan Amount -->
+                        <div class="form-group">
+                            <label for="Loan_Amount">Requested Loan Amount (₹/$) <span class="required">*</span></label>
+                            <input 
+                                type="number" 
+                                id="Loan_Amount" 
+                                name="Loan_Amount" 
+                                min="1000" 
+                                step="1000" 
+                                placeholder="e.g. 250000" 
+                                required
+                            >
+                            <span class="field-hint">Total principal requested</span>
+                        </div>
+
+                        <!-- Loan Term -->
+                        <div class="form-group">
+                            <label for="Loan_Term">Loan Term (Months) <span class="required">*</span></label>
+                            <select id="Loan_Term" name="Loan_Term" required>
+                                <option value="" disabled selected>Select Term Duration</option>
+                                <option value="120">120 Months (10 Years)</option>
+                                <option value="180">180 Months (15 Years)</option>
+                                <option value="240">240 Months (20 Years)</option>
+                                <option value="300">300 Months (25 Years)</option>
+                                <option value="360">360 Months (30 Years)</option>
+                            </select>
+                            <span class="field-hint">Standard mortgage/loan tenure</span>
+                        </div>
+
+                        <!-- Property Area -->
+                        <div class="form-group">
+                            <label for="Property_Area">Property Area <span class="required">*</span></label>
+                            <select id="Property_Area" name="Property_Area" required>
+                                <option value="" disabled selected>Select Area</option>
+                                <option value="Urban">Urban</option>
+                                <option value="Semiurban">Semiurban</option>
+                                <option value="Rural">Rural</option>
+                            </select>
+                            <span class="field-hint">Location classification of property</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Form Controls / Action Buttons -->
+                <div class="form-actions">
+                    <button type="submit" id="predictBtn" class="btn btn-primary">
+                        <span class="btn-spinner" id="btnSpinner" aria-hidden="true"></span>
+                        <span class="btn-text" id="btnText">Predict Loan Status</span>
+                    </button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">
+                        Reset Form
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- Error Banner -->
+            <div id="errorAlert" class="alert alert-error" style="display: none;" role="alert">
+                <span class="alert-icon">⚠️</span>
+                <span id="errorMessage" class="alert-text"></span>
+            </div>
+
+            <!-- Prediction Result Card -->
+            <div id="resultCard" class="result-card" style="display: none;">
+                <div class="result-header">
+                    <div id="resultBadge" class="result-badge">
+                        <span id="resultIcon" class="result-icon"></span>
+                        <span id="resultStatus" class="result-status"></span>
+                    </div>
+                </div>
+
+                <div class="result-body">
+                    <p id="resultMessage" class="result-message"></p>
+
+                    <!-- Confidence Meter (Visible when confidence exists) -->
+                    <div id="confidenceContainer" class="confidence-container">
+                        <div class="confidence-header">
+                            <span class="confidence-label">Prediction Confidence</span>
+                            <span id="confidenceValue" class="confidence-value">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="confidenceBar" class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mandatory Regulatory / System Disclaimer -->
+                <div class="result-disclaimer">
+                    <span class="disclaimer-icon">ℹ️</span>
+                    <span><strong>Disclaimer:</strong> This is a machine learning prediction, not a final lending decision.</span>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>FastAPI Backend • scikit-learn Machine Learning Model • <a href="/docs" target="_blank" class="footer-link">Interactive API Docs</a></p>
+        </footer>
+
+    </div>
+
+    <!-- Application Script -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
