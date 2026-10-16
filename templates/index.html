@@ -215,14 +215,7 @@
                         <!-- Loan Term -->
                         <div class="form-group">
                             <label for="Loan_Term">Loan Term (Months) <span class="required">*</span></label>
-                            <select id="Loan_Term" name="Loan_Term" required>
-                                <option value="" disabled selected>Select Term Duration</option>
-                                <option value="120">120 Months (10 Years)</option>
-                                <option value="180">180 Months (15 Years)</option>
-                                <option value="240">240 Months (20 Years)</option>
-                                <option value="300">300 Months (25 Years)</option>
-                                <option value="360">360 Months (30 Years)</option>
-                            </select>
+                            <input type="number" id="Loan_Term" name="Loan_Term" min="1" max="480" step="1" placeholder="e.g. 240 (months)" required>
                             <span class="field-hint">Standard mortgage/loan tenure</span>
                         </div>
 
@@ -304,3 +297,5 @@
     <script src="/static/js/app.js"></script>
 </body>
 </html>
+
+

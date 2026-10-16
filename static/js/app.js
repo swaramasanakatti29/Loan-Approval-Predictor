@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Existing_Debt: 40668.0,
         Credit_Score: 777.0,
         Loan_Amount: 800000.0,
-        Loan_Term: "300",
+        Loan_Term: 300,
         Property_Area: "Urban"
     };
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Existing_Debt: 89066.0,
         Credit_Score: 600.0,
         Loan_Amount: 265000.0,
-        Loan_Term: "240",
+        Loan_Term: 240,
         Property_Area: "Rural"
     };
 
@@ -243,3 +243,4 @@ document.addEventListener("DOMContentLoaded", () => {
         resultCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 });
+
