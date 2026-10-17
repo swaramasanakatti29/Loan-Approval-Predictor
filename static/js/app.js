@@ -105,11 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isLoading) {
             predictBtn.disabled = true;
             predictBtn.classList.add("loading");
-            btnText.textContent = "Predicting Approval...";
+            btnText.textContent = "PREDICTING...";
         } else {
             predictBtn.disabled = false;
             predictBtn.classList.remove("loading");
-            btnText.textContent = "Predict";
+            btnText.textContent = "PREDICT";
         }
     }
 
@@ -216,11 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
         resultCard.className = "result-card " + (isApproved ? "approved" : "rejected");
         
         // Update badge text and icon
+                const checkSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        const crossSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
         if (isApproved) {
-            resultIcon.textContent = "âœ“";
+            resultIcon.innerHTML = checkSvg;
             resultStatus.textContent = "Loan Likely Approved";
         } else {
-            resultIcon.textContent = "âœ•";
+            resultIcon.innerHTML = crossSvg;
             resultStatus.textContent = "Loan Likely Rejected";
         }
 

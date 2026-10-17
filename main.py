@@ -125,8 +125,9 @@ async def serve_home(request: Request):
         request=request,
         name="index.html",
         context={
-            "title": "Loan Approval Prediction System"
-        }
+            "title": "Loan Approval Predictor"
+        },
+        media_type="text/html; charset=utf-8"
     )
 
 
