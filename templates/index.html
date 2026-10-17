@@ -11,24 +11,29 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="app-container">
         
-        <header class="header">
-            <h1>Loan Approval Predictor</h1>
-            <p>Enter applicant details to predict loan approval likelihood.</p>
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="header-title">Loan Approval Predictor</h1>
+            <p class="header-subtitle">Enter applicant details to predict loan approval likelihood.</p>
         </header>
 
-        <main class="card">
-            <form id="loanForm" novalidate>
+        <!-- Single White Rounded Card -->
+        <main class="main-card">
+
+            <form id="loanForm" class="loan-form" novalidate>
                 
-                <div class="grid">
-                    
-                    <div class="field">
+                <!-- 3-Column Grid -->
+                <div class="form-grid">
+
+                    <!-- ROW 1 -->
+                    <div class="form-group">
                         <label for="Age">Age</label>
                         <input type="number" id="Age" name="Age" min="18" max="100" placeholder="e.g. 38" required>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Gender">Gender</label>
                         <select id="Gender" name="Gender" required>
                             <option value="" disabled selected>Select Gender</option>
@@ -37,16 +42,17 @@
                         </select>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Married">Marital Status</label>
                         <select id="Married" name="Married" required>
                             <option value="" disabled selected>Select Status</option>
-                            <option value="No">Single</option>
-                            <option value="Yes">Married</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
                         </select>
                     </div>
 
-                    <div class="field">
+                    <!-- ROW 2 -->
+                    <div class="form-group">
                         <label for="Dependents">Dependents</label>
                         <select id="Dependents" name="Dependents" required>
                             <option value="" disabled selected>Select Dependents</option>
@@ -57,7 +63,7 @@
                         </select>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Education">Education</label>
                         <select id="Education" name="Education" required>
                             <option value="" disabled selected>Select Education</option>
@@ -66,7 +72,7 @@
                         </select>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Self_Employed">Self Employed</label>
                         <select id="Self_Employed" name="Self_Employed" required>
                             <option value="" disabled selected>Select Option</option>
@@ -75,47 +81,47 @@
                         </select>
                     </div>
 
-                    <div class="field">
+                    <!-- ROW 3 -->
+                    <div class="form-group">
                         <label for="Applicant_Income">Applicant Income (Annual)</label>
                         <input type="number" id="Applicant_Income" name="Applicant_Income" min="0" step="1000" placeholder="e.g. 465,000" required>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Coapplicant_Income">Co-applicant Income (Annual)</label>
                         <input type="number" id="Coapplicant_Income" name="Coapplicant_Income" min="0" step="1000" placeholder="e.g. 65,000 (0 if none)" required>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Existing_Debt">Existing Debt (Total)</label>
                         <input type="number" id="Existing_Debt" name="Existing_Debt" min="0" step="1000" placeholder="e.g. 77,000 (0 if none)" required>
                     </div>
 
-                    <div class="field">
+                    <!-- ROW 4 -->
+                    <div class="form-group">
                         <label for="Credit_Score">Credit Score</label>
                         <input type="number" id="Credit_Score" name="Credit_Score" min="300" max="850" step="1" placeholder="e.g. 657" required>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Loan_Amount">Loan Amount</label>
-                        <input type="number" id="Loan_Amount" name="Loan_Amount" min="1000" step="1000" placeholder="e.g. 204,000" required>
+                        <input type="number" id="Loan_Amount" name="Loan_Amount" min="1000" step="1000" placeholder="e.g. 250000" required>
                     </div>
 
-                    <div class="field">
+                    <div class="form-group">
                         <label for="Loan_Term">Loan Term (Months)</label>
                         <select id="Loan_Term" name="Loan_Term" required>
                             <option value="" disabled selected>Select Months</option>
-                            <option value="36">36 Months (3 Years)</option>
-                            <option value="60">60 Months (5 Years)</option>
-                            <option value="84">84 Months (7 Years)</option>
-                            <option value="120">120 Months (10 Years)</option>
-                            <option value="180">180 Months (15 Years)</option>
-                            <option value="240">240 Months (20 Years)</option>
-                            <option value="300">300 Months (25 Years)</option>
-                            <option value="360">360 Months (30 Years)</option>
+                            <option value="120">120 months (10 years)</option>
+                            <option value="180">180 months (15 years)</option>
+                            <option value="240">240 months (20 years)</option>
+                            <option value="300">300 months (25 years)</option>
+                            <option value="360">360 months (30 years)</option>
                         </select>
                     </div>
 
-                    <div class="field">
+                    <!-- ROW 5 (Left Column Only) -->
+                    <div class="form-group col-span-left">
                         <label for="Property_Area">Property Area</label>
                         <select id="Property_Area" name="Property_Area" required>
                             <option value="" disabled selected>Select Area</option>
@@ -127,46 +133,61 @@
 
                 </div>
 
-                <div class="actions">
+                <!-- Divider Line -->
+                <hr class="form-divider">
+
+                <!-- Side-by-side Left-Aligned Action Buttons -->
+                <div class="form-actions">
                     <button type="submit" id="predictBtn" class="btn btn-primary">
-                        <span class="btn-spinner" id="btnSpinner"></span>
-                        <span id="btnText">Predict</span>
+                        <span class="btn-spinner" id="btnSpinner" aria-hidden="true"></span>
+                        <span class="btn-text" id="btnText">Predict</span>
                     </button>
-                    <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">
+                        Reset
+                    </button>
                 </div>
 
             </form>
 
-            <div id="errorAlert" class="alert" style="display: none;">
-                <span id="errorMessage"></span>
+            <!-- Error Banner -->
+            <div id="errorAlert" class="alert alert-error" style="display: none;" role="alert">
+                <span class="alert-icon">⚠️</span>
+                <span id="errorMessage" class="alert-text"></span>
             </div>
 
-            <div id="resultCard" class="result" style="display: none;">
-                <div class="result-badge" id="resultBadge">
-                    <span id="resultIcon"></span>
-                    <span id="resultStatus"></span>
-                </div>
-                <p id="resultMessage" class="result-text"></p>
-                
-                <div id="confidenceContainer" class="confidence-box">
-                    <div class="confidence-info">
-                        <span>Confidence</span>
-                        <strong id="confidenceValue"></strong>
-                    </div>
-                    <div class="bar-bg">
-                        <div id="confidenceBar" class="bar-fill"></div>
+            <!-- Prediction Result Card -->
+            <div id="resultCard" class="result-card" style="display: none;">
+                <div class="result-header">
+                    <div id="resultBadge" class="result-badge">
+                        <span id="resultIcon" class="result-icon"></span>
+                        <span id="resultStatus" class="result-status"></span>
                     </div>
                 </div>
 
-                <p class="disclaimer">
-                    Disclaimer: This is a machine learning prediction, not a final lending decision.
-                </p>
+                <div class="result-body">
+                    <p id="resultMessage" class="result-message"></p>
+
+                    <div id="confidenceContainer" class="confidence-container">
+                        <div class="confidence-header">
+                            <span class="confidence-label">Prediction Confidence</span>
+                            <span id="confidenceValue" class="confidence-value">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="confidenceBar" class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-disclaimer">
+                    <span class="disclaimer-icon">ℹ️</span>
+                    <span><strong>Disclaimer:</strong> This is a machine learning prediction, not a final lending decision.</span>
+                </div>
             </div>
 
         </main>
 
-        <footer class="footer">
-            <p><a href="/docs" target="_blank">API Documentation</a></p>
+        <footer class="app-footer">
+            <p>FastAPI Backend • scikit-learn Model • <a href="/docs" target="_blank" class="footer-link">API Docs</a></p>
         </footer>
 
     </div>
